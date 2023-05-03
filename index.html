@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Untitled741_20230410125250-1.png" type="image/x-icon">
+    <title>Deiform</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        /* Updated color variables */
+        :root {
+            --white-color: #ffffff;
+            --primary-color: #222831;
+            --secondary-color: #393e46;
+            --dark-bg: #1a1a1a;
+            --darker-bg: #0f0f0f;
+            --light-bg: #2d2d2d;
+            --accent-color: #d72323;
+            --link-hover-color: #b51c1c;
+            --shadow-color: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Global reset and base styling */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--white-color);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Custom scroll bar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo img {
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white-color);
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+
+
+        .nav-links a::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            background-color: var(--dark-bg);
+            padding: 2rem;
+        }
+
+        .hero {
+            background-color: #141414;
+            padding: 20px;
+        }
+
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .hero-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            height: 4px;
+            width: 100px;
+            background-color: var(--accent-color);
+        }
+
+
+
+        .hero-description {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.8rem 1.6rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .cta-button:hover {
+            background-color: var(--link-hover-color);
+            transform: translateY(-2px);
+        }
+
+        .cta-button:focus {
+            outline: none;
+        }
+
+        /* Video section */
+        .video-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--light-bg);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+        /* Footer section */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #000;
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--white-color);
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-links a::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Additional HTML element styling */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            height: 4px;
+            width: 100px;
+            background-color: var(--accent-color);
+            transform: translateX(-50%);
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        /* Interactivity */
+        .smooth-scroll {
+            transition: transform 0.3s ease;
+        }
+
+        .smooth-scroll:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Add this new keyframes animation to the CSS */
+        @keyframes fadeInZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Add this rule to apply the animation to the elements with the animate-on-load class */
+        .animate-on-load {
+            opacity: 0;
+            animation: fadeInZoom 1s ease forwards;
+        }
+
+        /* Add these rules to delay the animation of each subsequent element */
+        .hero.animate-on-load {
+            animation-delay: 0.2s;
+        }
+
+        /* Add these rules to delay the animation of each subsequent element */
+        .hero.animate-on-load {
+            animation-delay: 0.5s;
+        }
+
+        .video-section.animate-on-load {
+            animation-delay: 1s;
+        }
+
+        footer.animate-on-load {
+            animation-delay: 1.5s;
+        }
+
+        /* Add a subtle text shadow for better readability */
+        body {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Add a smooth transition for color changes */
+        .nav-links a,
+        .footer-links a {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Add a background color on hover to the nav and footer links */
+        .nav-links a:hover,
+        .footer-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            border-radius: 4px;
+            padding: 4px 8px;
+        }
+
+        /* Add a divider between the nav and footer links */
+        .nav-links::after,
+        .footer-links::before {
+            content: "|";
+            color: var(--white-color);
+            opacity: 0.5;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        /* Add a subtle border to the hero section */
+        .hero {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Add a custom bullet style to lists */
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--accent-color);
+            margin-right: 8px;
+        }
+
+        /* Add a smooth scale effect on images */
+        img {
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Add a smooth box-shadow transition to buttons and images */
+        .cta-button,
+        .logo img {
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Add a hover effect to buttons */
+        .cta-button:hover {
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        /* Add a hover effect to the logo image */
+        .logo img:hover {
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .nav-links a.discord::before {
+            content: "";
+            background-image: url(your-discord-icon-path-here);
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        nav.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            animation: slide-down 0.3s ease forwards;
+        }
+
+        @keyframes slide-down {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .hamburger {
+            display: none;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 1rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--white-color);
+            margin: 6px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger.is-active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-6px, 6px);
+        }
+
+        .hamburger.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.is-active span:nth-child(3) {
+            transform: rotate(45deg) translate(-6px, -6px);
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                margin-bottom: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav.active {
+                display: block;
+            }
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .section-title {
+            text-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .cta-button {
+            position: relative;
+        }
+
+        .cta-button::before {
+            content: "";
+            background-image: url('path/to/your/icon.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Add an animated hover effect for the social media icons */
+        .footer-links a.social {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .footer-links a.social::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .footer-links a.social:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.2;
+        }
+
+        /* Add a typing animation for the hero title */
+        .hero-title span {
+            display: inline-block;
+            animation: typing 3s steps(20, end) 1s 1 normal both;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Add a simple fade-in animation for the video section */
+        .video-section {
+            opacity: 0;
+            animation: fadeIn 1s 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Add this CSS rule for the scroll-to-top button */
+        .scroll-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 48px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            z-index: 100;
+        }
+
+
+        .icon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Style for the social icons */
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: var(--white-color);
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #000;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-icon img {
+            max-height: 140px;
+            max-width: 140px;
+        }
+
+
+        .hero-line {
+            border-top: 1px solid #fff;
+            height: 0;
+            margin: 20px 0;
+            width: 50%;
+        }
+
+        .icon img {
+            max-height: 30px;
+            max-width: 30px;
+        }
+
+        .hero {
+            /* Add a gradient background */
+            background-image: linear-gradient(145deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+            border-radius: 10px;
+            /* Add rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Add a shadow */
+            padding: 2rem;
+            /* Add padding to create space between content and edges */
+            /* Add a transition for a smooth hover effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Add a hover effect to emphasize the 3D look */
+        .hero:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Add a text shadow to the title and description for depth */
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-description {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        
+
+
+        .trailer-heading {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 50px;
+}
+
+.video-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-bg);
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px; /* Set the maximum width of the video container */
+    height: 0;
+    padding-bottom: 30%; /* Adjust this value to change the aspect ratio */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* Add border-radius to round the edges of the video */
+}
+
+
+
+    </style>
+</head>
+<script>$(window).scroll(function () {
+        if ($(this).scrollTop() > 0) {
+            $('nav').addClass('sticky');
+        } else {
+            $('nav').removeClass('sticky');
+        }
+    });
+
+    $('.hamburger').click(function () {
+        $(this).toggleClass('is-active');
+        $('.nav-links').toggleClass('active');
+    });
+
+
+    $(window).scroll(function () {
+        var position = $(this).scrollTop();
+        $('.nav-links a').each(function () {
+            var target = $(this).attr('href');
+            var offset = $(target).offset().top;
+            var height = $(target).outerHeight();
+            if (position >= offset && position < offset + height) {
+                $('.nav-links a').removeClass('active');
+                $(this).addClass('active');
+            }
+        });
+    });
+
+    $('.scroll-to-top').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 500);
+        return false;
+    });
+
+    $(window).scroll(function () {
+        var position = $(this).scrollTop();
+        $('.nav-links a').each(function () {
+            var target = $(this).attr('href');
+            var offset = $(target).offset().top;
+            var height = $(target).outerHeight();
+            if (position >= offset && position < offset + height) {
+                $('.nav-links a').removeClass('active');
+                $(this).addClass('active');
+            }
+        });
+    });
+
+    $('a[href*="#"]').on('click', function (e) {
+        e.preventDefault();
+
+        $('html, body').animate(
+            {
+                scrollTop: $($(this).attr('href')).offset().top,
+            },
+            500,
+            'linear'
+        );
+    });
+
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        elements.forEach(element => {
+            const elementRect = element.getBoundingClientRect();
+            const elementY = scrollY + elementRect.top;
+            const isVisible = scrollY + windowHeight - elementRect.height / 2 > elementY &&
+                elementY + elementRect.height / 2 > scrollY;
+
+            if (isVisible) {
+                element.classList.add('animate');
+            } else {
+                element.classList.remove('animate');
+            }
+        });
+    }
+
+    // Call animateOnScroll on scroll event
+    window.addEventListener('scroll', animateOnScroll);
+
+    // Add .animate-on-scroll class to elements you want to animate on scroll
+    document.querySelectorAll('.section-title, .section-description').forEach(element => {
+        element.classList.add('animate-on-scroll');
+    });
+
+    document.querySelector('.hamburger').addEventListener('click', function () {
+        this.classList.toggle('is-active');
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const elements = document.querySelectorAll(".animate-on-load");
+        elements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.5}s`;
+        });
+    });
+</script>
+
+<body>
+    <button class="scroll-to-top smooth-scroll" aria-label="Scroll to top">&#x2191;</button>
+    <div class="background-animation"></div>
+
+    <button class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav animate-on-load">
+        <div class="logo">
+            <img src="image.png" alt="Logo">
+            <span class="logo-text">Deiform</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="smooth-scroll">Home</a>
+            <a href="#about" class="smooth-scroll">About</a>
+            <a href="wiki.html" class="smooth-scroll">Wiki</a>
+        </div>
+    </nav>
+    <div class="hero animate-on-load" id="home">
+        <div class="hero-icon">
+            <img src="image.png" alt="Icon">
+        </div>
+        <h1 class="hero-title">Deiform</h1>
+        <hr class="hero-line">
+        </hr>
+        <p class="hero-description">Deiform is a specialized community dedicated to cultivating a fresh wave of
+            distinctive content and influential figures within the diverse realms of the Roblox platform. Our mission
+            revolves around developing exceptional projects that distinguish us from the masses and leave a lasting
+            impact on the communities we engage with.</p>
+        <hr class="hero-line">
+        </hr>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdF5qzXk8M7z2hCCwyKQo3tJdourPasck7qm6Bj-u7sxUxK4Q/viewform"
+            class="cta-button">Apply Now</a>
+    </div>
+
+
+    <div class="video-section animate-on-load">
+        <h2 class="trailer-heading">Trailer #1</h2>
+        <div class="video-container">
+            <iframe src="file:///C:/Users/valer/Downloads/Untitled_4.mp4" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+    
+    
+
+
+    <footer class="animate-on-load">
+        <div class="footer-links">
+            <a href="#home" class="smooth-scroll">Home</a>
+            <a href="#about" class="smooth-scroll">About</a>
+            <a href="wiki.html" class="smooth-scroll">Wiki</a>
+        </div>
+        <div class="bottombar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="image.png" alt="Logo">
+                    <span class="logo-text">Deiform</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@Deiform103" class="icon"><i class="fab fa-youtube"></i></a>
+            <a href="https://twitter.com/DeiformPage" class="icon"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" class="icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/4kvsamE6PV" class="icon" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://www.roblox.com/groups/15794703/Deiform#!/about" class="icon"><img
+                    src="icons8-roblox-50.png" alt="Icon"></a>
+
+
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
